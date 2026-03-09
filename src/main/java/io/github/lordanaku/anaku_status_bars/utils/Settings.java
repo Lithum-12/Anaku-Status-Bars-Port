@@ -14,13 +14,14 @@ public final class Settings {
     public static final HudElementType ARMOR = new HudElementType("armor", true, true, true, false, 0xb8b9c4, 1);
     public static final HudElementType AIR = new HudElementType("air", true, false, true, false, 0x0094ff, 1);
     public static final HudElementType MOUNT_HEALTH = new HudElementType("mount_health", true, false, true, false, 0xda662c, 1);
+    public static final HudElementType WATER = new HudElementType("water", true, false, true, false, 0x0094ff, 1);
 
     /* * Default Settings * */
     public static boolean shouldUseVanillaTextures = false;
     public static final int LEFT_DEFAULT = 40;
     public static final int RIGHT_DEFAULT = 40;
     public static final ArrayList<String> LEFT_ORDER_DEFAULT = new ArrayList<>(Arrays.asList(HEALTH.name(), ARMOR.name()));
-    public static final ArrayList<String> RIGHT_ORDER_DEFAULT = new ArrayList<>(Arrays.asList(FOOD.name(), AIR.name(), MOUNT_HEALTH.name()));
+    public static final ArrayList<String> RIGHT_ORDER_DEFAULT = new ArrayList<>(Arrays.asList(FOOD.name(), AIR.name(), MOUNT_HEALTH.name(), WATER.name()));
     public static final float ALPHA_DEFAULT = 0.5f;
     public static final int ABSORPTION_COLOR_DEFAULT = 0xd4af37;
     public static final int POISON_COLOR_DEFAULT = 0x8b8712;
@@ -29,6 +30,7 @@ public final class Settings {
     public static final int HURT_COLOR_DEFAULT = 0x550000;
     public static final int HUNGER_COLOR_DEFAULT = 0x5f6d43;
     public static final int SATURATION_COLOR_DEFAULT = 0xd42a2a;
+    public static final int WATER_SATURATION_COLOR_DEFAULT = 0x2a9fd4;
 
     /* * Setting Categories * */
     public static final Map<String, Boolean> shouldRenderSettings = new HashMap<>();
@@ -53,6 +55,8 @@ public final class Settings {
         shouldRenderSettings.put(ARMOR.name(), ARMOR.shouldRender());
         shouldRenderSettings.put(AIR.name(), AIR.shouldRender());
         shouldRenderSettings.put(MOUNT_HEALTH.name(), MOUNT_HEALTH.shouldRender());
+        shouldRenderSettings.put(WATER.name(), WATER.shouldRender());
+        shouldRenderSettings.put(WATER.name() + "_saturation", WATER.shouldRender());
 
         /* * Side Settings * */
         sideSettings.put(HEALTH.name(), HEALTH.side());
@@ -60,6 +64,7 @@ public final class Settings {
         sideSettings.put(ARMOR.name(), ARMOR.side());
         sideSettings.put(AIR.name(), AIR.side());
         sideSettings.put(MOUNT_HEALTH.name(), MOUNT_HEALTH.side());
+        sideSettings.put(WATER.name(), WATER.side());
 
         /* * Should Render Icon Settings * */
         shouldRenderIconSettings.put(HEALTH.name(), HEALTH.shouldRenderIcon());
@@ -67,6 +72,7 @@ public final class Settings {
         shouldRenderIconSettings.put(ARMOR.name(), ARMOR.shouldRenderIcon());
         shouldRenderIconSettings.put(AIR.name(), AIR.shouldRenderIcon());
         shouldRenderIconSettings.put(MOUNT_HEALTH.name(), MOUNT_HEALTH.shouldRenderIcon());
+        shouldRenderIconSettings.put(WATER.name(), WATER.shouldRenderIcon());
 
         /* * Should Render Text Settings * */
         shouldRenderTextSettings.put(HEALTH.name(), HEALTH.shouldRenderText());
@@ -74,6 +80,7 @@ public final class Settings {
         shouldRenderTextSettings.put(ARMOR.name(), ARMOR.shouldRenderText());
         shouldRenderTextSettings.put(AIR.name(), AIR.shouldRenderText());
         shouldRenderTextSettings.put(MOUNT_HEALTH.name(), MOUNT_HEALTH.shouldRenderText());
+        shouldRenderTextSettings.put(WATER.name(), WATER.shouldRenderText());
 
         /* * Color Settings * */
         colorSettings.put(HEALTH.name(), HEALTH.color());
@@ -88,6 +95,8 @@ public final class Settings {
         colorSettings.put(ARMOR.name(), ARMOR.color());
         colorSettings.put(AIR.name(), AIR.color());
         colorSettings.put(MOUNT_HEALTH.name(), MOUNT_HEALTH.color());
+        colorSettings.put(WATER.name(), WATER.color());
+        colorSettings.put(WATER.name() + "_saturation", WATER_SATURATION_COLOR_DEFAULT);
 
         /* * Text Color Settings * */
         textColorSettings.put(HEALTH.name(), HEALTH.color());
@@ -97,6 +106,8 @@ public final class Settings {
         textColorSettings.put(ARMOR.name(), ARMOR.color());
         textColorSettings.put(AIR.name(), AIR.color());
         textColorSettings.put(MOUNT_HEALTH.name(), MOUNT_HEALTH.color());
+        textColorSettings.put(WATER.name(), WATER.color());
+        textColorSettings.put(WATER.name() + "_saturation", WATER_SATURATION_COLOR_DEFAULT);
 
         /* * Alpha Settings * */
         alphaSettings.put(HEALTH.name(), HEALTH.alpha());
@@ -107,10 +118,12 @@ public final class Settings {
         alphaSettings.put(ARMOR.name(), ARMOR.alpha());
         alphaSettings.put(AIR.name(), AIR.alpha());
         alphaSettings.put(MOUNT_HEALTH.name(), MOUNT_HEALTH.alpha());
+        alphaSettings.put(WATER.name(), WATER.alpha());
+        alphaSettings.put(WATER.name() + "_saturation", WATER.alpha());
 
         // * Side Order Settings * //
         sideOrderSettings.put("left", new ArrayList<>(Arrays.asList(HEALTH.name(), ARMOR.name())));
-        sideOrderSettings.put("right", new ArrayList<>(Arrays.asList(FOOD.name(), AIR.name(), MOUNT_HEALTH.name())));
+        sideOrderSettings.put("right", new ArrayList<>(Arrays.asList(FOOD.name(), AIR.name(), MOUNT_HEALTH.name(), WATER.name())));
 
         // * Position Settings * //
         positionSettings.put("left_y_offset", LEFT_DEFAULT);

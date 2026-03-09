@@ -40,7 +40,7 @@ public class AnakuStatusBarsCore {
         /* * Read Settings * */
         ConfigFileHandler.readFromConfig();
         /* * Register Hud Elements * */
-        RenderHudHelper.registerHudElements(new HealthHudElement(), new FoodHudElement(), new ArmorHudElement(), new AirHudElement(), new MountHealthHudElement());
+        RenderHudHelper.registerHudElements(new HealthHudElement(), new FoodHudElement(), new ArmorHudElement(), new AirHudElement(), new MountHealthHudElement(), new WaterHudElement());
         RenderHudHelper.setupHudElements();
     }
 

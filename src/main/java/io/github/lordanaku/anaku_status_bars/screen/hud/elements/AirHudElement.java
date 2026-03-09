@@ -12,6 +12,7 @@ import me.shedaniel.clothconfig2.gui.entries.BooleanListEntry;
 import me.shedaniel.clothconfig2.gui.entries.ColorEntry;
 import me.shedaniel.clothconfig2.gui.entries.FloatListEntry;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
@@ -21,30 +22,30 @@ public class AirHudElement implements IHudElement {
     private boolean renderSide = AIR.side();
 
     @Override
-    public void renderBar(PoseStack poseStack) {
+    public void renderBar(GuiGraphics guiGraphics, PoseStack poseStack) {
         if (getAirProgress() <= 0) {
-            RenderHudFunctions.drawStatusEffectBar(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.DEFAULT_BAR,
+            RenderHudFunctions.drawStatusEffectBar(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.DEFAULT_BAR,
                     Settings.colorSettings.get(Settings.HEALTH.name() + "_hurt"));
         } else {
-            RenderHudFunctions.drawDefaultBar(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.DEFAULT_BAR);
+            RenderHudFunctions.drawDefaultBar(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.DEFAULT_BAR);
         }
-        RenderHudFunctions.drawProgressBar(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.PROGRESS_BAR, getAirProgress(),
+        RenderHudFunctions.drawProgressBar(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.PROGRESS_BAR, getAirProgress(),
                 Settings.colorSettings.get(AIR.name()), Settings.alphaSettings.get(AIR.name()));
     }
 
     @Override
-    public void renderIcon(PoseStack poseStack) {
+    public void renderIcon(GuiGraphics guiGraphics, PoseStack poseStack) {
         if (getAirProgress() <= 0) {
-            RenderHudFunctions.drawIcon(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.BUBBLE_BURST_ICON, 81);
+            RenderHudFunctions.drawIcon(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.BUBBLE_BURST_ICON, 81);
         } else {
-            RenderHudFunctions.drawIcon(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.BUBBLE_ICON, 81);
+            RenderHudFunctions.drawIcon(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.BUBBLE_ICON, 81);
         }
     }
 
     @Override
-    public void renderText(PoseStack poseStack) {
+    public void renderText(GuiGraphics guiGraphics, PoseStack poseStack) {
         assert Minecraft.getInstance().player != null; Player player = Minecraft.getInstance().player;
-        RenderHudFunctions.drawText(poseStack, String.valueOf(Math.round(player.getAirSupply())), getSide(), shouldRenderIcon(), RenderHudHelper.getPosYMod(getSide()), Settings.textColorSettings.get(AIR.name()), 81);
+        RenderHudFunctions.drawText(guiGraphics, poseStack, String.valueOf(Math.round(player.getAirSupply())), getSide(), shouldRenderIcon(), RenderHudHelper.getPosYMod(getSide()), Settings.textColorSettings.get(AIR.name()), 81);
 
     }
 

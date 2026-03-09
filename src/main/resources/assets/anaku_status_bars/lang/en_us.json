@@ -14,6 +14,8 @@
     "option.anaku_status_bars.enable_saturation_bar": "Enable Saturation Bar",
     "option.anaku_status_bars.enable_exhaustion_bar": "Enable Exhaustion Bar",
     "option.anaku_status_bars.enable_mount_health_bar": "Enable Mount Health Bar",
+    "option.anaku_status_bars.enable_water_bar": "Enable Water Bar",
+    "option.anaku_status_bars.enable_water_saturation_bar": "Enable Water Saturation Bar",
 
   "category.anaku_status_bars.icon": "Icon Toggles",
     "option.anaku_status_bars.enable_health_icon": "Enable Health Icon",
@@ -21,6 +23,7 @@
     "option.anaku_status_bars.enable_armor_icon": "Enable Armor Icon",
     "option.anaku_status_bars.enable_food_icon": "Enable Food Icon",
     "option.anaku_status_bars.enable_mount_health_icon": "Enable Mount Health Icon",
+    "option.anaku_status_bars.enable_water_icon": "Enable Water Icon",
 
   "category.anaku_status_bars.text": "Text Toggles",
     "option.anaku_status_bars.enable_health_text": "Enable Health Text",
@@ -28,6 +31,7 @@
     "option.anaku_status_bars.enable_armor_text": "Enable Armor Text",
     "option.anaku_status_bars.enable_food_text": "Enable Food Text",
     "option.anaku_status_bars.enable_mount_health_text": "Enable Mount Health Text",
+    "option.anaku_status_bars.enable_water_text": "Enable Water Text",
 
   "category.anaku_status_bars.color": "Color",
     "option.anaku_status_bars.health_bar_color": "Health Bar Color",
@@ -37,6 +41,8 @@
     "option.anaku_status_bars.food_color": "Food Bar Color",
     "option.anaku_status_bars.saturation_color": "Saturation Bar Color",
     "option.anaku_status_bars.mount_health_color": "Mount Health Bar Color",
+    "option.anaku_status_bars.water_color": "Water Bar Color",
+    "option.anaku_status_bars.water_saturation_color": "Water Saturation Bar Color",
 
   "category.anaku_status_bars.text_color": "Text Color",
     "option.anaku_status_bars.health_text_color": "Health Text Color",
@@ -46,6 +52,8 @@
     "option.anaku_status_bars.food_text_color": "Food Text Color",
     "option.anaku_status_bars.saturation_text_color": "Saturation Text Color",
     "option.anaku_status_bars.mount_health_text_color": "Mount Health Text Color",
+    "option.anaku_status_bars.water_text_color": "Water Text Color",
+    "option.anaku_status_bars.water_saturation_text_color": "Water Saturation Text Color",
 
   "category.anaku_status_bars.alpha": "Alpha",
     "option.anakus_status_bars.alpha_tooltip": "The alpha of the status bar, from 0 to 1",
@@ -57,6 +65,8 @@
     "option.anaku_status_bars.saturation_alpha": "Saturation Bar Alpha",
     "option.anaku_status_bars.exhaustion_alpha": "Exhaustion Bar Alpha",
     "option.anaku_status_bars.mount_health_alpha": "Mount Health Bar Alpha",
+    "option.anaku_status_bars.water_alpha": "Water Bar Alpha",
+    "option.anaku_status_bars.water_saturation_alpha": "Water Saturation Bar Alpha",
 
 
   "category.anaku_status_bars.position": "Position",

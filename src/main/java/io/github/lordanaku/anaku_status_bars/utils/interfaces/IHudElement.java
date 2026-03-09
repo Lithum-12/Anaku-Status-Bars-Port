@@ -3,11 +3,12 @@ package io.github.lordanaku.anaku_status_bars.utils.interfaces;
 import com.mojang.blaze3d.vertex.PoseStack;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
+import net.minecraft.client.gui.GuiGraphics;
 
 public interface IHudElement {
-    void renderBar(PoseStack poseStack);
-    void renderIcon(PoseStack poseStack);
-    void renderText(PoseStack poseStack);
+    void renderBar(GuiGraphics guiGraphics, PoseStack poseStack);
+    void renderIcon(GuiGraphics guiGraphics, PoseStack poseStack);
+    void renderText(GuiGraphics guiGraphics, PoseStack poseStack);
     boolean getSide();
     IHudElement setRenderSide(boolean side);
     boolean shouldRender();

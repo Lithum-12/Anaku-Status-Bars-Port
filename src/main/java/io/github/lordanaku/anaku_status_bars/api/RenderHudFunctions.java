@@ -9,7 +9,7 @@ import io.github.lordanaku.anaku_status_bars.utils.interfaces.IHudElement;
 import io.github.lordanaku.anaku_status_bars.utils.records.HudElementType;
 import io.github.lordanaku.anaku_status_bars.utils.records.TextureRecord;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
 
 public class RenderHudFunctions {
 
@@ -51,11 +51,11 @@ public class RenderHudFunctions {
      * @param posYMod - the amount you want to add to the base -40 y position.
      * @param textureRecord - the texture record for the bar.
      */
-    public static void drawDefaultBar(PoseStack poseStack, boolean side, int posYMod, TextureRecord textureRecord) {
+    public static void drawDefaultBar(GuiGraphics guiGraphics, PoseStack poseStack, boolean side, int posYMod, TextureRecord textureRecord) {
         RenderSystem.setShaderTexture(0, textureRecord.texture());
-        int finalSide = (side) ? RenderHudHelper.getPosX(true) : RenderHudHelper.getPosX(false);
+        int finalX = (side) ? RenderHudHelper.getPosX(true) : RenderHudHelper.getPosX(false);
         RenderSystem.setShaderColor(1, 1, 1, 1);
-        GuiComponent.blit(poseStack, finalSide, RenderHudHelper.getPosY() + posYMod,
+        guiGraphics.blit(textureRecord.texture(), finalX, RenderHudHelper.getPosY() + posYMod,
                 textureRecord.startX(), textureRecord.startY(),
                 textureRecord.width(), textureRecord.height(),
                 textureRecord.maxWidth(), textureRecord.maxHeight());
@@ -69,10 +69,10 @@ public class RenderHudFunctions {
      * @param progress - the progress of the bar.
      * @param alpha - the color of the bar. (Hex Value)
      */
-    public static void drawExhaustBar(PoseStack poseStack, boolean side, int posYMod, TextureRecord textureRecord, int progress, float alpha) {
+    public static void drawExhaustBar(GuiGraphics guiGraphics, PoseStack poseStack, boolean side, int posYMod, TextureRecord textureRecord, int progress, float alpha) {
         RenderSystem.setShaderTexture(0, textureRecord.texture());
         RenderSystem.setShaderColor(1, 1, 1, alpha);
-        drawProgress(poseStack, side, posYMod, textureRecord, progress);
+        drawProgress(guiGraphics, poseStack, side, posYMod, textureRecord, progress);
     }
 
     /**
@@ -84,10 +84,10 @@ public class RenderHudFunctions {
      * @param color - the color of the bar. (Hex Value)
      * @param alpha - the alpha of the bar.
      */
-    public static void drawProgressBar(PoseStack poseStack, boolean side, int posYMod, TextureRecord textureRecord, int progress, int color, float alpha) {
+    public static void drawProgressBar(GuiGraphics guiGraphics, PoseStack poseStack, boolean side, int posYMod, TextureRecord textureRecord, int progress, int color, float alpha) {
         RenderSystem.setShaderTexture(0, textureRecord.texture());
         RenderSystem.setShaderColor(ColorUtils.fromHex(color).getRedF(), ColorUtils.fromHex(color).getGreenF(), ColorUtils.fromHex(color).getBlueF(), alpha);
-        drawProgress(poseStack, side, posYMod, textureRecord, progress);
+        drawProgress(guiGraphics, poseStack, side, posYMod, textureRecord, progress);
     }
 
     /**
@@ -97,11 +97,11 @@ public class RenderHudFunctions {
      * @param textureRecord - the texture record for the bar.
      * @param color - the color of the bar. (Hex Value)
      */
-    public static void drawStatusEffectBar(PoseStack poseStack, boolean side, int posYMod, TextureRecord textureRecord, int color) {
+    public static void drawStatusEffectBar(GuiGraphics guiGraphics, PoseStack poseStack, boolean side, int posYMod, TextureRecord textureRecord, int color) {
         RenderSystem.setShaderTexture(0, textureRecord.texture());
         RenderSystem.setShaderColor(ColorUtils.fromHex(color).getRedF(), ColorUtils.fromHex(color).getGreenF(), ColorUtils.fromHex(color).getBlueF(), 1);
-        int finalSide = (side) ? RenderHudHelper.getPosX(true) : RenderHudHelper.getPosX(false);
-        GuiComponent.blit(poseStack, finalSide, RenderHudHelper.getPosY() + posYMod,
+        int finalX = (side) ? RenderHudHelper.getPosX(true) : RenderHudHelper.getPosX(false);
+        guiGraphics.blit(textureRecord.texture(), finalX, RenderHudHelper.getPosY() + posYMod,
                 textureRecord.startX(), textureRecord.startY(),
                 textureRecord.width(), textureRecord.height(),
                 textureRecord.maxWidth(), textureRecord.maxHeight());
@@ -114,17 +114,17 @@ public class RenderHudFunctions {
      * @param textureRecord - the texture record for the bar.
      * @param barWidth - the width of the bar so method can determine offset.
      */
-    public static void drawIcon(PoseStack poseStack, boolean side, int posYMod, TextureRecord textureRecord, int barWidth) {
+    public static void drawIcon(GuiGraphics guiGraphics, PoseStack poseStack, boolean side, int posYMod, TextureRecord textureRecord, int barWidth) {
         RenderSystem.setShaderTexture(0, textureRecord.texture());
         RenderSystem.setShaderColor(1, 1, 1, 1);
         if (side) {
-            GuiComponent.blit(poseStack,
+            guiGraphics.blit(textureRecord.texture(),
                     RenderHudHelper.getPosX(true) - (textureRecord.width() + 1), RenderHudHelper.getPosY() + posYMod,
                     textureRecord.startX(), textureRecord.startY(),
                     textureRecord.width(), textureRecord.height(),
                     textureRecord.maxWidth(), textureRecord.maxHeight());
         } else {
-            GuiComponent.blit(poseStack,
+            guiGraphics.blit(textureRecord.texture(),
                     RenderHudHelper.getPosX(false) + (barWidth + 1), RenderHudHelper.getPosY() + posYMod,
                     textureRecord.startX(), textureRecord.startY(),
                     textureRecord.width(), textureRecord.height(),
@@ -141,25 +141,25 @@ public class RenderHudFunctions {
      * @param color - the color of the text. (Hex Value)
      * @param barWidth - the width of the bar so method can determine offset.
      */
-    public static void drawText(PoseStack poseStack, String text, boolean side, boolean icon, int posYMod, int color, int barWidth) {
-        int finalSide = (side) ? RenderHudHelper.getPosX(true) - (Minecraft.getInstance().font.width(text) + 1) : RenderHudHelper.getPosX(false) + (barWidth + 1);
+    public static void drawText(GuiGraphics guiGraphics, PoseStack poseStack, String text, boolean side, boolean icon, int posYMod, int color, int barWidth) {
+        int finalX = (side) ? RenderHudHelper.getPosX(true) - (Minecraft.getInstance().font.width(text) + 1) : RenderHudHelper.getPosX(false) + (barWidth + 1);
 
         if (icon) {
-            finalSide = (side) ? finalSide - 10 : finalSide + 10;
+            finalX = (side) ? finalX - 10 : finalX + 10;
         }
 
-        GuiComponent.drawString(poseStack, Minecraft.getInstance().font, text, finalSide, RenderHudHelper.getPosY() + posYMod + 1, color);
+        guiGraphics.drawString(Minecraft.getInstance().font, text, finalX, RenderHudHelper.getPosY() + posYMod + 1, color);
     }
 
-    private static void drawProgress(PoseStack poseStack, boolean side, int posYMod, TextureRecord textureRecord, int progress) {
+    private static void drawProgress(GuiGraphics guiGraphics, PoseStack poseStack, boolean side, int posYMod, TextureRecord textureRecord, int progress) {
         if (side) {
-            GuiComponent.blit(poseStack,
+            guiGraphics.blit(textureRecord.texture(),
                     RenderHudHelper.getPosX(true), RenderHudHelper.getPosY() + posYMod,
                     textureRecord.startX(), textureRecord.startY(),
                     progress, textureRecord.height(),
                     textureRecord.maxWidth(), textureRecord.maxHeight());
         } else {
-            GuiComponent.blit(poseStack,
+            guiGraphics.blit(textureRecord.texture(),
                     RenderHudHelper.getPosX(false) + (textureRecord.width() - progress), RenderHudHelper.getPosY() + posYMod,
                     textureRecord.startX() + (textureRecord.width() - progress), textureRecord.startY(),
                     textureRecord.width(), textureRecord.height(),

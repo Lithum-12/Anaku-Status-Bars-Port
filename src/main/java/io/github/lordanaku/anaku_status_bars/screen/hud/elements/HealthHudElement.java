@@ -12,6 +12,7 @@ import me.shedaniel.clothconfig2.gui.entries.BooleanListEntry;
 import me.shedaniel.clothconfig2.gui.entries.ColorEntry;
 import me.shedaniel.clothconfig2.gui.entries.FloatListEntry;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -22,54 +23,54 @@ public class HealthHudElement implements IHudElement {
     private boolean renderSide = HEALTH.side();
 
     @Override
-    public void renderBar(PoseStack poseStack) {
+    public void renderBar(GuiGraphics guiGraphics, PoseStack poseStack) {
         assert Minecraft.getInstance().player != null; Player player = Minecraft.getInstance().player;
         if (player.hasEffect(MobEffects.POISON)) {
-            RenderHudFunctions.drawStatusEffectBar(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.DEFAULT_BAR,
+            RenderHudFunctions.drawStatusEffectBar(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.DEFAULT_BAR,
                     Settings.colorSettings.get(HEALTH.name() + "_poison"));
         } else if (player.hasEffect(MobEffects.WITHER)) {
-            RenderHudFunctions.drawStatusEffectBar(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.DEFAULT_BAR,
+            RenderHudFunctions.drawStatusEffectBar(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.DEFAULT_BAR,
                     Settings.colorSettings.get(HEALTH.name() + "_wither"));
         } else if (player.isFreezing()){
-            RenderHudFunctions.drawStatusEffectBar(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.DEFAULT_BAR,
+            RenderHudFunctions.drawStatusEffectBar(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.DEFAULT_BAR,
                     Settings.colorSettings.get(HEALTH.name() + "_frostbite"));
         } else {
-            RenderHudFunctions.drawDefaultBar(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.DEFAULT_BAR);
+            RenderHudFunctions.drawDefaultBar(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.DEFAULT_BAR);
         }
-        RenderHudFunctions.drawProgressBar(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.PROGRESS_BAR, getHealthProgress(),
+        RenderHudFunctions.drawProgressBar(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.PROGRESS_BAR, getHealthProgress(),
                 Settings.colorSettings.get(HEALTH.name()), Settings.alphaSettings.get(HEALTH.name()));
 
         if(Settings.shouldRenderSettings.get(HEALTH.name() + "_absorption")) {
-            RenderHudFunctions.drawProgressBar(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.PROGRESS_BAR, getAbsorptionProgress(),
+            RenderHudFunctions.drawProgressBar(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.PROGRESS_BAR, getAbsorptionProgress(),
                     Settings.colorSettings.get(HEALTH.name() + "_absorption"), Settings.alphaSettings.get(HEALTH.name() + "_absorption"));
         }
     }
 
     @Override
-    public void renderIcon(PoseStack poseStack) {
+    public void renderIcon(GuiGraphics guiGraphics, PoseStack poseStack) {
         assert Minecraft.getInstance().player != null; Player player = Minecraft.getInstance().player;
-        RenderHudFunctions.drawIcon(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.HEART_OUTLINE_ICON, 81);
+        RenderHudFunctions.drawIcon(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.HEART_OUTLINE_ICON, 81);
         if (player.hasEffect(MobEffects.POISON)) {
-            RenderHudFunctions.drawIcon(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.HEART_POISON_ICON, 81);
+            RenderHudFunctions.drawIcon(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.HEART_POISON_ICON, 81);
         } else if (player.hasEffect(MobEffects.WITHER)) {
-            RenderHudFunctions.drawIcon(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.HEART_WITHER_ICON, 81);
+            RenderHudFunctions.drawIcon(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.HEART_WITHER_ICON, 81);
         } else if (player.isFreezing()) {
-            RenderHudFunctions.drawIcon(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.HEART_FROSTBITE_ICON, 81);
+            RenderHudFunctions.drawIcon(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.HEART_FROSTBITE_ICON, 81);
         } else if (player.hasEffect(MobEffects.ABSORPTION)) {
-            RenderHudFunctions.drawIcon(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.HEART_ABSORPTION_ICON, 81);
+            RenderHudFunctions.drawIcon(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.HEART_ABSORPTION_ICON, 81);
         } else {
-            RenderHudFunctions.drawIcon(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.HEART_ICON, 81);
+            RenderHudFunctions.drawIcon(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.HEART_ICON, 81);
         }
     }
 
     @Override
-    public void renderText(PoseStack poseStack) {
+    public void renderText(GuiGraphics guiGraphics, PoseStack poseStack) {
         assert Minecraft.getInstance().player != null; Player player = Minecraft.getInstance().player;
         if (player.hasEffect(MobEffects.ABSORPTION) && player.getAbsorptionAmount() > 0 && Settings.shouldRenderSettings.get(HEALTH.name() + "_absorption")) {
-            RenderHudFunctions.drawText(poseStack, String.valueOf(Math.round(player.getHealth() + player.getAbsorptionAmount())), getSide(), shouldRenderIcon(), RenderHudHelper.getPosYMod(getSide()),
+            RenderHudFunctions.drawText(guiGraphics, poseStack, String.valueOf(Math.round(player.getHealth() + player.getAbsorptionAmount())), getSide(), shouldRenderIcon(), RenderHudHelper.getPosYMod(getSide()),
                     Settings.textColorSettings.get(HEALTH.name() + "_absorption"), 81);
         } else {
-            RenderHudFunctions.drawText(poseStack, String.valueOf(Math.round(player.getHealth())), getSide(), shouldRenderIcon(), RenderHudHelper.getPosYMod(getSide()), Settings.textColorSettings.get(HEALTH.name()), 81);
+            RenderHudFunctions.drawText(guiGraphics, poseStack, String.valueOf(Math.round(player.getHealth())), getSide(), shouldRenderIcon(), RenderHudHelper.getPosYMod(getSide()), Settings.textColorSettings.get(HEALTH.name()), 81);
         }
     }
 

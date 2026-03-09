@@ -11,6 +11,7 @@ import me.shedaniel.clothconfig2.gui.entries.BooleanListEntry;
 import me.shedaniel.clothconfig2.gui.entries.ColorEntry;
 import me.shedaniel.clothconfig2.gui.entries.FloatListEntry;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -23,47 +24,47 @@ public class FoodHudElement implements IHudElement {
     private final int MAX_PROGRESS = 81;
 
     @Override
-    public void renderBar(PoseStack poseStack) {
+    public void renderBar(GuiGraphics guiGraphics, PoseStack poseStack) {
         assert Minecraft.getInstance().player != null; Player player = Minecraft.getInstance().player;
         if (player.hasEffect(MobEffects.HUNGER)) {
-            RenderHudFunctions.drawStatusEffectBar(poseStack, getSide(), getPosYMod(getSide()), TextureRecords.DEFAULT_BAR,
+            RenderHudFunctions.drawStatusEffectBar(guiGraphics, poseStack, getSide(), getPosYMod(getSide()), TextureRecords.DEFAULT_BAR,
                     Settings.colorSettings.get(FOOD.name() + "_hunger"));
         } else {
-            RenderHudFunctions.drawDefaultBar(poseStack, getSide(), getPosYMod(getSide()), TextureRecords.DEFAULT_BAR);
+            RenderHudFunctions.drawDefaultBar(guiGraphics, poseStack, getSide(), getPosYMod(getSide()), TextureRecords.DEFAULT_BAR);
         }
-        RenderHudFunctions.drawProgressBar(poseStack, getSide(), getPosYMod(getSide()), TextureRecords.PROGRESS_BAR, getFoodProgress(),
+        RenderHudFunctions.drawProgressBar(guiGraphics, poseStack, getSide(), getPosYMod(getSide()), TextureRecords.PROGRESS_BAR, getFoodProgress(),
                 Settings.colorSettings.get(FOOD.name()), Settings.alphaSettings.get(FOOD.name()));
 
         if (Settings.shouldRenderSettings.get(FOOD.name() + "_saturation")) {
-            RenderHudFunctions.drawProgressBar(poseStack, getSide(), getPosYMod(getSide()), TextureRecords.PROGRESS_BAR, getSaturationProgress(),
+            RenderHudFunctions.drawProgressBar(guiGraphics, poseStack, getSide(), getPosYMod(getSide()), TextureRecords.PROGRESS_BAR, getSaturationProgress(),
                     Settings.colorSettings.get(FOOD.name() + "_saturation"), Settings.alphaSettings.get(FOOD.name() + "_saturation"));
         }
         if (Settings.shouldRenderSettings.get(FOOD.name() + "_exhaustion")) {
-            RenderHudFunctions.drawExhaustBar(poseStack, getSide(), getPosYMod(getSide()), TextureRecords.EXHAUSTION_BAR, getExhaustionProgress(),
+            RenderHudFunctions.drawExhaustBar(guiGraphics, poseStack, getSide(), getPosYMod(getSide()), TextureRecords.EXHAUSTION_BAR, getExhaustionProgress(),
                     Settings.alphaSettings.get(FOOD.name() + "_exhaustion"));
         }
     }
 
     @Override
-    public void renderIcon(PoseStack poseStack) {
+    public void renderIcon(GuiGraphics guiGraphics, PoseStack poseStack) {
         assert Minecraft.getInstance().player != null; Player player = Minecraft.getInstance().player;
-        RenderHudFunctions.drawIcon(poseStack, getSide(), getPosYMod(getSide()), TextureRecords.FOOD_OUTLINE_ICON, 81);
+        RenderHudFunctions.drawIcon(guiGraphics, poseStack, getSide(), getPosYMod(getSide()), TextureRecords.FOOD_OUTLINE_ICON, 81);
         if (player.hasEffect(MobEffects.HUNGER)) {
-            RenderHudFunctions.drawIcon(poseStack, getSide(), getPosYMod(getSide()), TextureRecords.HUNGER_ICON, 81);
+            RenderHudFunctions.drawIcon(guiGraphics, poseStack, getSide(), getPosYMod(getSide()), TextureRecords.HUNGER_ICON, 81);
         } else {
-            RenderHudFunctions.drawIcon(poseStack, getSide(), getPosYMod(getSide()), TextureRecords.FOOD_ICON, 81);
+            RenderHudFunctions.drawIcon(guiGraphics, poseStack, getSide(), getPosYMod(getSide()), TextureRecords.FOOD_ICON, 81);
         }
 
     }
 
     @Override
-    public void renderText(PoseStack poseStack) {
+    public void renderText(GuiGraphics guiGraphics, PoseStack poseStack) {
         assert Minecraft.getInstance().player != null; Player player = Minecraft.getInstance().player;
         if (Settings.shouldRenderSettings.get(FOOD.name() + "_saturation") && player.getFoodData().getSaturationLevel() > 0) {
-            RenderHudFunctions.drawText(poseStack, String.valueOf(Math.round(player.getFoodData().getFoodLevel() + player.getFoodData().getSaturationLevel())), getSide(), shouldRenderIcon(), getPosYMod(getSide()),
+            RenderHudFunctions.drawText(guiGraphics, poseStack, String.valueOf(Math.round(player.getFoodData().getFoodLevel() + player.getFoodData().getSaturationLevel())), getSide(), shouldRenderIcon(), getPosYMod(getSide()),
                     Settings.textColorSettings.get(FOOD.name() + "_saturation"), 81);
         } else {
-            RenderHudFunctions.drawText(poseStack, String.valueOf(player.getFoodData().getFoodLevel()), getSide(), shouldRenderIcon(), getPosYMod(getSide()), Settings.textColorSettings.get(FOOD.name()), 81);
+            RenderHudFunctions.drawText(guiGraphics, poseStack, String.valueOf(player.getFoodData().getFoodLevel()), getSide(), shouldRenderIcon(), getPosYMod(getSide()), Settings.textColorSettings.get(FOOD.name()), 81);
         }
     }
 

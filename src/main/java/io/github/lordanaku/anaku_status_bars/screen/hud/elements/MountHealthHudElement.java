@@ -12,6 +12,7 @@ import me.shedaniel.clothconfig2.gui.entries.BooleanListEntry;
 import me.shedaniel.clothconfig2.gui.entries.ColorEntry;
 import me.shedaniel.clothconfig2.gui.entries.FloatListEntry;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,22 +24,22 @@ public class MountHealthHudElement implements IHudElement {
     private boolean renderSide = MOUNT_HEALTH.side();
 
     @Override
-    public void renderBar(PoseStack poseStack) {
-        RenderHudFunctions.drawDefaultBar(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.DEFAULT_BAR);
-        RenderHudFunctions.drawProgressBar(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.PROGRESS_BAR, getMountHealthProgress(),
+    public void renderBar(GuiGraphics guiGraphics, PoseStack poseStack) {
+        RenderHudFunctions.drawDefaultBar(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.DEFAULT_BAR);
+        RenderHudFunctions.drawProgressBar(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.PROGRESS_BAR, getMountHealthProgress(),
                 Settings.colorSettings.get(MOUNT_HEALTH.name()), Settings.alphaSettings.get(MOUNT_HEALTH.name()));
     }
 
     @Override
-    public void renderIcon(PoseStack poseStack) {
-        RenderHudFunctions.drawIcon(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.HEART_OUTLINE_ICON, 81);
-        RenderHudFunctions.drawIcon(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.HEART_MOUNT_ICON, 81);
+    public void renderIcon(GuiGraphics guiGraphics, PoseStack poseStack) {
+        RenderHudFunctions.drawIcon(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.HEART_OUTLINE_ICON, 81);
+        RenderHudFunctions.drawIcon(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.HEART_MOUNT_ICON, 81);
     }
 
     @Override
-    public void renderText(PoseStack poseStack) {
+    public void renderText(GuiGraphics guiGraphics, PoseStack poseStack) {
         LivingEntity mountEntity = getRiddenEntity(); assert mountEntity != null;
-        RenderHudFunctions.drawText(poseStack, String.valueOf(Math.round(mountEntity.getHealth())), getSide(), shouldRenderIcon(), RenderHudHelper.getPosYMod(getSide()), Settings.textColorSettings.get(MOUNT_HEALTH.name()), 81);
+        RenderHudFunctions.drawText(guiGraphics, poseStack, String.valueOf(Math.round(mountEntity.getHealth())), getSide(), shouldRenderIcon(), RenderHudHelper.getPosYMod(getSide()), Settings.textColorSettings.get(MOUNT_HEALTH.name()), 81);
     }
 
     @Override

@@ -1,5 +1,7 @@
 # Anaku's Status Bars Forge
 
+![NewUiNoFont.png]
+
 ---
 
 ## Description

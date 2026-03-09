@@ -1,9 +1,11 @@
 package io.github.lordanaku.anaku_status_bars.screen.hud;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import io.github.lordanaku.anaku_status_bars.utils.Settings;
 import io.github.lordanaku.anaku_status_bars.utils.interfaces.IHudElement;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
@@ -14,7 +16,7 @@ public class RenderHudElements {
     private static int posXLeftOffset = 91;
     private static int posXRightOffset = 10;
 
-    public static final IGuiOverlay RENDER_HUD_ELEMENTS = ((gui, poseStack, partialTick, screenWidth, screenHeight) -> {
+    public static final IGuiOverlay RENDER_HUD_ELEMENTS = ((gui, guiGraphics, partialTick, screenWidth, screenHeight) -> {
         int x = screenWidth / 2;
 
         RenderHudHelper.setPosX(true, (x - posXLeftOffset) + Settings.positionSettings.get("left_x_offset"));
@@ -24,14 +26,16 @@ public class RenderHudElements {
         RenderSystem.setShader(GameRenderer::getPositionShader);
         RenderHudHelper.resetIncrements();
 
+        PoseStack poseStack = guiGraphics.pose();
+
         assert Minecraft.getInstance().player != null; Player player = Minecraft.getInstance().player;
         if (!player.isSpectator()){
             if (!player.isCreative()) {
                 for (IHudElement hudElement : RenderHudHelper.getHudElementRegistry()) {
                     if (hudElement.shouldRender()) {
-                        hudElement.renderBar(poseStack);
+                        hudElement.renderBar(guiGraphics, poseStack);
                         if (hudElement.shouldRenderIcon()) {
-                            hudElement.renderIcon(poseStack);
+                            hudElement.renderIcon(guiGraphics, poseStack);
                         }
                         RenderHudHelper.setPosYMod(hudElement.getSide(), -yModIncrement);
                     }
@@ -41,7 +45,7 @@ public class RenderHudElements {
                 for (IHudElement hudElement : RenderHudHelper.getHudElementRegistry()) {
                     if (hudElement.shouldRender()) {
                         if (hudElement.shouldRenderText()) {
-                            hudElement.renderText(poseStack);
+                            hudElement.renderText(guiGraphics, poseStack);
                         }
                         RenderHudHelper.setPosYMod(hudElement.getSide(), -yModIncrement);
                     }

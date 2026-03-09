@@ -12,6 +12,7 @@ import me.shedaniel.clothconfig2.gui.entries.BooleanListEntry;
 import me.shedaniel.clothconfig2.gui.entries.ColorEntry;
 import me.shedaniel.clothconfig2.gui.entries.FloatListEntry;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
@@ -25,20 +26,20 @@ public class ArmorHudElement implements IHudElement {
     private boolean renderSide = ARMOR.side();
 
     @Override
-    public void renderBar(PoseStack poseStack) {
-        RenderHudFunctions.drawDefaultBar(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.DEFAULT_BAR);
-        RenderHudFunctions.drawProgressBar(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.PROGRESS_BAR, getArmorProgress(),
+    public void renderBar(GuiGraphics guiGraphics, PoseStack poseStack) {
+        RenderHudFunctions.drawDefaultBar(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.DEFAULT_BAR);
+        RenderHudFunctions.drawProgressBar(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.PROGRESS_BAR, getArmorProgress(),
                 Settings.colorSettings.get(ARMOR.name()), Settings.alphaSettings.get(ARMOR.name()));
     }
 
     @Override
-    public void renderIcon(PoseStack poseStack) {
-        RenderHudFunctions.drawIcon(poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.ARMOR_ICON, 81);
+    public void renderIcon(GuiGraphics guiGraphics, PoseStack poseStack) {
+        RenderHudFunctions.drawIcon(guiGraphics, poseStack, getSide(), RenderHudHelper.getPosYMod(getSide()), TextureRecords.ARMOR_ICON, 81);
     }
 
     @Override
-    public void renderText(PoseStack poseStack) {
-        RenderHudFunctions.drawText(poseStack, String.valueOf(getArmorDamageValue()), getSide(), shouldRenderIcon(), RenderHudHelper.getPosYMod(getSide()), Settings.textColorSettings.get(ARMOR.name()), 81);
+    public void renderText(GuiGraphics guiGraphics, PoseStack poseStack) {
+        RenderHudFunctions.drawText(guiGraphics, poseStack, String.valueOf(getArmorDamageValue()), getSide(), shouldRenderIcon(), RenderHudHelper.getPosYMod(getSide()), Settings.textColorSettings.get(ARMOR.name()), 81);
     }
 
     @Override
