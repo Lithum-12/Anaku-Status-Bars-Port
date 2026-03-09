@@ -672,3 +672,76 @@ may consider it more useful to permit linking proprietary applications with
 the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 <https://www.gnu.org/licenses/why-not-lgpl.html>.
+
+================================================================================
+
+                    ANAKU STATUS BARS FORGE - LICENSE ADDENDUM
+================================================================================
+
+Copyright (C) 2024 Lord Anaku (Original Author)
+Copyright (C) 2024-2026 Lithum-12 (Remake Author)
+
+This program is a remake of the original Anaku Status Bars mod.
+
+ORIGINAL AUTHOR:
+    Lord Anaku - Original creator of Anaku Status Bars
+
+REMAKE AUTHOR:
+    Lithum-12 - Author of this Forge remake version
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+================================================================================
+
+THIRD-PARTY LICENSES:
+
+This mod includes code and assets from the following third-party sources:
+
+1. Minecraft Forge
+   - License: Minecraft Forge Public License (MFPL)
+   - Website: https://files.minecraftforge.net/
+
+2. Mixin
+   - License: MIT License
+   - Website: https://github.com/SpongePowered/Mixin
+
+================================================================================
+
+PERMISSIONS AND RESTRICTIONS:
+
+1. You are free to use, modify, and distribute this mod as long as you
+   comply with the terms of the GNU General Public License version 3.
+
+2. If you modify this mod and distribute it, you must:
+   - Clearly indicate that this is a modified version
+   - Include the source code or provide a written offer to supply it
+   - Maintain the original copyright notices
+
+3. This mod is provided "AS IS" without warranty of any kind.
+
+4. The original author (Lord Anaku) and the remake author (Lithum-12)
+   are not responsible for any damages caused by the use or modification
+   of this software.
+
+================================================================================
+
+CONTACT INFORMATION:
+
+Original Author (Lord Anaku):
+    GitHub: https://github.com/Lordanaku
+
+Remake Author (Lithum-12):
+    GitHub: https://github.com/Lithum-12
+
+================================================================================

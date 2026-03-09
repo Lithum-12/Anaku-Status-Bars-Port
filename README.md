@@ -1,12 +1,14 @@
-# Anaku's Status Bars Forge
-
-![NewUiNoFont.png]
+![Banner](NewUi.png)
 
 ---
 
 ## Description
 
 Replaces the vanilla Minecraft status bars with an alternative that is more customizable and with progressive bars.
+
+This mod is supported on Minecraft 1.20.1.
+
+This is a remake of the original mod, which is no longer being updated.
 
 ---
 ## Features
@@ -28,5 +30,3 @@ Replaces the vanilla Minecraft status bars with an alternative that is more cust
 ![](https://i.imgur.com/TtitsHT.png)
 
 ---
-
-## [Use this Mod to add status bars to your own mod here!](https://github.com/LordAnaku/Anaku_Status_Bars_Forge/wiki)
