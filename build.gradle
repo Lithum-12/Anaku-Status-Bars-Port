@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'io.github.lordanaku'
-version = '2.0.0-1.20.1'
+version = '3.0.0-1.20.1'
 
 base {
     archivesName = 'anaku_status_bars'
