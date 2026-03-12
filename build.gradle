@@ -17,28 +17,21 @@ java {
     withSourcesJar()
 }
 
-// ========== Minecraft / Forge 配置 ==========
 minecraft {
     mappings channel: 'official', version: '1.20.1'
-
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
     runs {
         client {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            mods {
-                anaku_status_bars { source sourceSets.main }
-            }
+            mods { anaku_status_bars { source sourceSets.main } }
         }
         server {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            mods {
-                anaku_status_bars { source sourceSets.main }
-            }
+            mods { anaku_status_bars { source sourceSets.main } }
         }
         data {
             workingDirectory project.file('run')
@@ -47,17 +40,13 @@ minecraft {
             args '--mod', 'anaku_status_bars', '--all',
                     '--output', file('src/generated/resources/'),
                     '--existing', file('src/main/resources/')
-            mods {
-                anaku_status_bars { source sourceSets.main }
-            }
+            mods { anaku_status_bars { source sourceSets.main } }
         }
     }
 }
-// =============================================
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-// Mixin 配置（如果你用了 Mixin）
 mixin {
     add sourceSets.main, 'anaku_status_bars.refmap.json'
     config 'anaku_status_bars.mixin.json'
@@ -65,9 +54,8 @@ mixin {
 
 repositories {
     mavenCentral()
-    maven { url = 'https://maven.minecraftforge.net' }           // Forge 本体
-    maven { url = 'https://libraries.minecraft.net' }            // MC 原版库
-    maven { url = "https://maven.shedaniel.me/" }
+    maven { url = 'https://maven.minecraftforge.net' }
+    maven { url = 'https://libraries.minecraft.net' }
     maven {
         url = "https://cursemaven.com"
         content { includeGroup "curse.maven" }
@@ -76,8 +64,15 @@ repositories {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.20.1-47.4.10'
-    implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:11.1.136")
-    implementation fg.deobf("curse.maven:homeostatic-634466:7229376")
+
+    // 已弃用 Cloth Config API，改为 Yet Another Config Lib（YACL）：
+    // compileOnly fg.deobf("me.shedaniel.cloth:cloth-config-forge:11.1.136")
+
+    // YACL 3.6.6 for Forge 1.20.1
+    compileOnly fg.deobf("curse.maven:yacl-667299:6336646")
+
+    // Homeostatic 可选依赖：编译期可直接 import，运行时不强制要求安装
+    compileOnly fg.deobf("curse.maven:homeostatic-634466:7229376")
 }
 
 jar {
@@ -95,7 +90,6 @@ jar {
     }
 }
 
-// 让 sources jar 和 javadoc jar 也经过 ForgeGradle 处理
 jar.finalizedBy('reobfJar')
 
 publishing {

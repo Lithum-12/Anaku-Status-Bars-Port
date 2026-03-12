@@ -3,7 +3,8 @@
   "package": "io.github.lordanaku.anaku_status_bars.mixin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "anaku_status_bars.refmap.json",
-  "mixins": [
+  "mixins": [],
+  "client": [
     "HomeostaticMixin"
   ],
   "minVersion": "0.8"
